@@ -1,5 +1,5 @@
 import math
-
+# VERY WORK IN PROGRESS
 ''' Uses basic kinematics equations (v = d/t, a = v/t, d = vt * 0.5*at^2) to generate a motion profile using a distance, acceleration, and a velocity
 The x axis of the motion profile is time, the y-axis is velocity.'''
 
