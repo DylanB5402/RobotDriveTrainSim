@@ -1,0 +1,3 @@
+commandbased
+magicbot
+robotpy_ext

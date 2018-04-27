@@ -15,6 +15,7 @@ class BezierCurve:
         self.y3 = y3
         self.step = step
 
+
     def generate_curve(self):
         x0 = self.x0
         y0 = self.y0
@@ -41,23 +42,23 @@ class BezierCurve:
             y = (y0*(1-t)**3) + (3*y1*t*(1-t)**2) + (3*y2*(1-t)*t**2) + (y3*t**3)
             delta_x = x-prev_x
             delta_y = y - prev_y
-            if delta_x == 0:
-                if delta_y > 0:
-                    angle = 0
-                elif delta_y < 0:
-                    angle = 180
-            elif delta_y == 0:
-                if delta_x > 0:
-                    angle = 90
-                elif delta_y < 0:
-                    angle = -90
-            else:
-                angle = math.atan2(delta_y, delta_x)
-                angle = math.degrees(angle)
-            if t == 0:
-                angle = 0
-            else:
-                angle = -((angle -270) % 360) + 180
+            # if delta_x == 0:
+            #     if delta_y > 0:
+            #         angle = 0
+            #     elif delta_y < 0:
+            #         angle = 180
+            # elif delta_y == 0:
+            #     if delta_x > 0:
+            #         angle = 90
+            #     elif delta_y < 0:
+            #         angle = -90
+            # else:
+            angle = math.atan2(delta_x, delta_y)
+            angle = math.degrees(angle)
+            # if t == 0:
+            #     angle = 0
+            # else:
+            #     angle = -((angle -270) % 360) + 180
             t_list.append(t)
             x_list.append(x)
             y_list.append(y)
@@ -76,7 +77,7 @@ class BezierCurve:
         print(y_list)
         print(angle_list)
 
-    def make_csv(self):
+    def make_csv(self, file_name):
         x0 = self.x0
         y0 = self.y0
         x1 = self.x1
@@ -86,8 +87,7 @@ class BezierCurve:
         x3 = self.x3
         y3 = self.y3
         step = self.step
-        __file_name__ = "test"
-        file = open(__file_name__ + ".csv", "a")
+        file = open("BezierCurveTests/" + file_name + ".csv", "a")
         file.truncate(0)
         file.write('x0,y0,x1,y1,x2,y2,x3,y3\n')
         file.write(str(x0) + ',' + str(y0) + ',' + str(x1) + ',' + str(y1) + ',' + str(x2) + ',' + str(y2) + ',' + str(x3) + ',' + str(y3) + '\n')
@@ -103,6 +103,4 @@ class BezierCurve:
         file.close()
 
 
-bezier = BezierCurve(0, 0, 0, 5, 5, 5, 5, 10, 100)
-bezier.generate_curve()
-bezier.make_csv()
+

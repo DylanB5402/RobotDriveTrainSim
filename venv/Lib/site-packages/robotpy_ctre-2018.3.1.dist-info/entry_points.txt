@@ -1,0 +1,6 @@
+[robotpylib]
+info = ctre._impl.info:Info
+
+[robotpysim]
+ctre = ctre._impl.sim_ui:CtreUI
+

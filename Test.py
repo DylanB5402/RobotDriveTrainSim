@@ -1,5 +1,6 @@
 import math
 import numpy
+from BezierCurve import BezierCurve
 
 def yaw(angle):
     return (360 - angle) % 360
@@ -34,6 +35,7 @@ def test_yaw():
         print(x, yaw(x))
         x += 1
 
+
 def calc_xy(left_encoder, right_encoder, angle):
     x = 0
     y = 0
@@ -58,5 +60,23 @@ def test_atan2_to_navx():
         print(x, atan2_to_navx(x))
         x += 1
 
-# print(calc_xy(1, 1, 90))
-test_atan2_to_navx()
+def error_test(desired, actual):
+    error = desired - actual
+    if error < -180:
+        error = error + 180
+    if error > 180:
+        error = error - 180
+    print(desired, actual, error)
+    print("separator")
+
+bezier = BezierCurve(0, 0, 0, 5, 5, 5, 5, 10, 100)
+bezier_2 = BezierCurve(0, 0, 0, 5, 0, 5, 0, 10, 100)
+bezier_3 = BezierCurve(0, 0, 2, 8, 6, 8, 8, 0, 100)
+bezier_4 = BezierCurve(0, 0, 10, 10, 0, -15, -5, 5, 100)
+# bezier.generate_curve()
+# bezier_2.generate_curve()
+# bezier_3.generate_curve()
+bezier_4.generate_curve()
+# bezier.make_csv("test")
+# bezier_2.make_csv("line")
+bezier_4.make_csv("loopyloop")

@@ -1,6 +1,8 @@
 import math
 # VERY WORK IN PROGRESS
-''' Uses basic kinematics equations (v = d/t, a = v/t, d = vt * 0.5*at^2) to generate a motion profile using a distance, acceleration, and a velocity
+# Math on desmos graph here
+# https://www.desmos.com/calculator/wzxax8oo7z
+''' Uses basic kinematics equations (v = d/t, a = v/t, d = vt + 0.5*at^2) to generate a motion profile using a distance, acceleration, and a cruise velocity
 The x axis of the motion profile is time, the y-axis is velocity.'''
 
 class MotionProfileTimeBased(object):

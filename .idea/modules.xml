@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../APCSPCreateTask/.idea/APCSPCreateTask.iml" filepath="$PROJECT_DIR$/../APCSPCreateTask/.idea/APCSPCreateTask.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/RobotDriveTrainTests.iml" filepath="$PROJECT_DIR$/.idea/RobotDriveTrainTests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../misc/.idea/misc.iml" filepath="$PROJECT_DIR$/../misc/.idea/misc.iml" />
     </modules>
   </component>
 </project>
