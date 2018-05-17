@@ -1,6 +1,8 @@
 import math
-import numpy
+import NerdyMath
 from BezierCurve import BezierCurve
+from MotionProfile import MotionProfileTimeBased
+
 
 def yaw(angle):
     return (360 - angle) % 360
@@ -69,19 +71,42 @@ def error_test(desired, actual):
     print(desired, actual, error)
     print("separator")
 
-calc_xy(100, 100, -45)
+
+def path_follower_test(x1, y1, x2, y2, x3, y3, lookahead):
+    deltaX = x2 - x1
+    deltaY = y2 - y1
+    distance = NerdyMath.distance_formula(x1, y1, x2, y2)
+    slope = deltaY/deltaX
+    # print(slope)
+    y_intercept = y1 - (slope * x1)
+    perpendicular_slope = -(slope ** -1)
+    # print(perpendicular_slope)
+    y_intercept2 = y3 - (perpendicular_slope * x3)
+    x_intersect = (y_intercept2 - y_intercept)/(slope - perpendicular_slope)
+    y_intersect = (perpendicular_slope * x_intersect) + y_intercept2
+    # print(x_intersect, y_intersect)
+    delta_x_target = (deltaX/distance) * lookahead
+    x_target = x_intersect + delta_x_target
+    y_target = (slope*x_target) + y_intercept
+    print(x_target, y_target)
+
+
 # bezier = BezierCurve(0, 0, 0, 5, 5, 5, 5, 10, 100)
 # bezier_2 = BezierCurve(0, 0, 0, 5, 0, 5, 0, 10, 100)
 # bezier_3 = BezierCurve(0, 0, 2, 8, 6, 8, 8, 0, 100)
 # bezier_4 = BezierCurve(0, 0, 10, 10, 0, -15, -5, 5, 100)
-bezier_5 = BezierCurve(0, 0, 5, 5, 5, 5, 10, 10, 100)
+# bezier_5 = BezierCurve(0, 0, 5, 5, 5, 5, 10, 10, 100)
 # bezier.generate_curve()
 # bezier_2.generate_curve()
 # bezier_3.generate_curve()
 # bezier_4.generate_curve()
-bezier_5.generate_curve()
+# bezier_5.generate_curve()
 # bezier.make_csv("test")
 # bezier_2.make_csv("line")
 # bezier_4.make_csv("loopyloop")
+# path_follower_test(0, 0, 60, 60, 10, 50, 9)
+motion_profile = MotionProfileTimeBased(100, 10, 1)
+motion_profile.generate_motion_profile()
+print(motion_profile.get_velocity(10))
 
 
