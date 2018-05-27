@@ -1,6 +1,7 @@
 import math
 import NerdyMath
 from BezierCurve import BezierCurve
+from BezierCurveTrajectory import BezierCurveTrajectory
 from MotionProfile import MotionProfileTimeBased
 
 
@@ -95,18 +96,11 @@ def path_follower_test(x1, y1, x2, y2, x3, y3, lookahead):
 # bezier_2 = BezierCurve(0, 0, 0, 5, 0, 5, 0, 10, 100)
 # bezier_3 = BezierCurve(0, 0, 2, 8, 6, 8, 8, 0, 100)
 # bezier_4 = BezierCurve(0, 0, 10, 10, 0, -15, -5, 5, 100)
-# bezier_5 = BezierCurve(0, 0, 5, 5, 5, 5, 10, 10, 100)
-# bezier.generate_curve()
-# bezier_2.generate_curve()
-# bezier_3.generate_curve()
-# bezier_4.generate_curve()
-# bezier_5.generate_curve()
-# bezier.make_csv("test")
-# bezier_2.make_csv("line")
-# bezier_4.make_csv("loopyloop")
-# path_follower_test(0, 0, 60, 60, 10, 50, 9)
-motion_profile = MotionProfileTimeBased(100, 10, 1)
-motion_profile.generate_motion_profile()
-print(motion_profile.get_velocity(10))
+bezier_5 = BezierCurve(0, 0, 5, 5, 5, 5, 10, 10, 100)
+# motion_profile = MotionProfileTimeBased(50, 5, 1)
+# motion_profile.generate_motion_profile()
+# print(motion_profile.get_velocity(11))
+
+test = BezierCurveTrajectory(0, 0, 5, 5, 5, 5, 10, 10, 100, 10, 1)
 
 

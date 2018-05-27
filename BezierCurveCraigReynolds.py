@@ -1,7 +1,7 @@
 import math
 import NerdyMath
 
-'''Bezier Curve without stuff for craig reynolds path following'''
+
 class BezierCurve:
 
     def __init__(self, x0, y0, x1, y1, x2, y2, x3, y3, step):
@@ -26,15 +26,24 @@ class BezierCurve:
         x3 = self.x3
         y3 = self.y3
         step = self.step
-        self.distance = 0
         # step is the number of points on the curve + 1 for t = 0,
+        distance = 0
+        hypotenuse = 0
         t = 0
         a = 0
+        angle = 0
+        slope = 0
+        y_intercept = 0
+        perpendicular_slope = 0
         t_list = []
         x_list = []
         y_list = []
-        angle = 0
         angle_list = []
+        slope_list = []
+        y_intercept_list = []
+        perpendicular_slope_list = []
+        hypotenuse_list = []
+        delta_x_list = []
         prev_x = 0
         prev_y = 0
         while t != 1:
@@ -46,16 +55,29 @@ class BezierCurve:
             angle = math.atan2(delta_x, delta_y)
             angle = math.degrees(angle)
             hypotenuse = NerdyMath.distance_formula(x, y, prev_x, prev_y)
-            self.distance += hypotenuse
+            if delta_x != 0:
+                slope = delta_y/delta_x
+            else:
+                slope = 0
+            y_intercept = y - slope*x
+            if slope != 0:
+                perpendicular_slope = -(slope**-1)
+            else:
+                perpendicular_slope = 0
+            distance += hypotenuse
             t_list.append(t)
             x_list.append(x)
             y_list.append(y)
             angle_list.append(angle)
+            slope_list.append(slope)
+            y_intercept_list.append(y_intercept)
+            perpendicular_slope_list.append(perpendicular_slope)
+            hypotenuse_list.append(hypotenuse)
+            delta_x_list.append(delta_x)
             a += 1
             prev_x = x
             prev_y = y
             print(t)
-            print(self.distance)
         self.t_list = t_list
         self.x_list = x_list
         self.y_list = y_list
@@ -65,6 +87,12 @@ class BezierCurve:
         print(x_list)
         print(y_list)
         print(angle_list)
+        print(distance)
+        print(slope_list)
+        print(y_intercept_list)
+        print(perpendicular_slope_list)
+        print(hypotenuse_list)
+        print(delta_x_list)
 
     def make_csv(self, file_name):
         x0 = self.x0
