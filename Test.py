@@ -1,8 +1,7 @@
 import math
 import NerdyMath
 from BezierCurve import BezierCurve
-from BezierCurveTrajectory import BezierCurveTrajectory
-from MotionProfile import MotionProfileTimeBased
+from MotionProfile import *
 
 
 def yaw(angle):
@@ -96,11 +95,12 @@ def path_follower_test(x1, y1, x2, y2, x3, y3, lookahead):
 # bezier_2 = BezierCurve(0, 0, 0, 5, 0, 5, 0, 10, 100)
 # bezier_3 = BezierCurve(0, 0, 2, 8, 6, 8, 8, 0, 100)
 # bezier_4 = BezierCurve(0, 0, 10, 10, 0, -15, -5, 5, 100)
-bezier_5 = BezierCurve(0, 0, 5, 5, 5, 5, 10, 10, 100)
-# motion_profile = MotionProfileTimeBased(50, 5, 1)
-# motion_profile.generate_motion_profile()
-# print(motion_profile.get_velocity(11))
+# bezier_5 = BezierCurve(0, 0, 5, 5, 5, 5, 10, 10, 100)
+# motion_profile = MotionProfileTimeBased 10, 0.5)
+# # motion_profile.graph()(500,
+# bezier_5.graph()
+# bezier.graph()
 
-test = BezierCurveTrajectory(0, 0, 5, 5, 5, 5, 10, 10, 100, 10, 1)
-
+motion_profile = MotionProfilePositionBased(10, 1, 2)
+motion_profile.graph()
 
