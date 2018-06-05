@@ -14,7 +14,8 @@ class BezierCurve:
         self.x3 = x3
         self.y3 = y3
         self.step = step
-        # self.generate_curve()
+        self.generate_curve()
+        self.graph()
 
 
     def generate_curve(self):
@@ -96,8 +97,11 @@ class BezierCurve:
         plt.plot(self.x_list, self.y_list)
         plt.xlabel('x')
         plt.ylabel('y')
-        x_scale = self.x_list[len(self.x_list)-1] * 1.25
-        y_scale = self.y_list[len(self.y_list)-1] * 1.25
+        x_scale = max(self.x_list) * 1.25
+        x_min = min(self.x_list) * 1.25
+        y_scale = max(self.y_list) * 1.25
+        y_min = min(self.y_list) * 1.25
         scale = NerdyMath.get_greater_value(x_scale, y_scale)
-        plt.axis([0, scale, 0, scale])
+        min_scale = NerdyMath.get_greater_value(x_min, y_min)
+        plt.axis([min_scale, scale, min_scale, scale])
         plt.show()
