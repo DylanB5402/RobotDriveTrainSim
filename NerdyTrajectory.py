@@ -1,8 +1,8 @@
 import math
 import NerdyMath
 import matplotlib.pyplot as plt
-'''Bezier Curve without stuff for craig reynolds path following'''
-class BezierCurve:
+'''Trajectories, meant to be odometry based'''
+class NerdyTrajectory:
 
     def __init__(self, x0, y0, x1, y1, x2, y2, x3, y3, step):
         self.x0 = x0
