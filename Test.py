@@ -2,7 +2,7 @@ import math
 import NerdyMath
 from BezierCurve import BezierCurve
 from MotionProfile import *
-
+from NerdyTrajectory import NerdyTrajectory
 
 def yaw(angle):
     return (360 - angle) % 360
@@ -92,7 +92,7 @@ def path_follower_test(x1, y1, x2, y2, x3, y3, lookahead):
 
 '''uses equations from 254, v = (l+r)/2, w = (r-l)/wheekbase width, w is rad/s, v can be any distance/sec'''
 def calc_wheel_velocities(v, w):
-    w = -w
+    w = -w #negate w, the equation assumes positive is ccw, but navx clockwise is cw
     wheelbase = 10
     l = (2*v - wheelbase * w)/2
     r = 2*v - l
@@ -112,4 +112,6 @@ def calc_wheel_velocities(v, w):
 # motion_profile = MotionProfilePositionBased(10, 1, 2)
 # motion_profile.graph()
 
-print(calc_wheel_velocities(1, 2))
+trajectory_1 = NerdyTrajectory(0, 0, 0, 50, 0, 50, 0, 100, 100, 1, 10, 3)
+# print(calc_wheel_velocities(1, 2))
+print(trajectory_1.velocity_list)
