@@ -63,9 +63,10 @@ class NerdyTrajectory:
             if velocity > self.cruise_velocity:
                 velocity = self.cruise_velocity
             time = (-prev_velocity + math.sqrt(prev_velocity**2 - 4 * 0.5 * self.acceleration * - hypotenuse))/self.acceleration
-            if time == 0:
-                time = 0.00000001
-            angular_vel = math.radians(delta_angle)/time
+            if time != 0:
+                angular_vel = math.radians(delta_angle)/time
+            else:
+                angular_vel = 0
             left_vel = (2 * velocity - self.wheelbase_width * angular_vel)/2
             right_vel = 2 * velocity - left_vel
             left_vel_list.append(left_vel)

@@ -3,7 +3,7 @@ import NerdyMath
 from BezierCurve import BezierCurve
 from MotionProfile import *
 from NerdyTrajectory import NerdyTrajectory
-
+from TestTrajectory import TestTrajectory
 def yaw(angle):
     return (360 - angle) % 360
 
@@ -112,6 +112,7 @@ def calc_wheel_velocities(v, w):
 # motion_profile = MotionProfilePositionBased(10, 1, 2)
 # motion_profile.graph()
 
-trajectory_1 = NerdyTrajectory(0, 0, 0, 50, 0, 50, 0, 100, 100, 1, 10, 3)
+# trajectory_1 = NerdyTrajectory(0, 0, 0, 50, 0, 50, 0, 100, 100, 1, 10, 3)
 # print(calc_wheel_velocities(1, 2))
-print(trajectory_1.velocity_list)
+# print(trajectory_1.velocity_list)
+test = TestTrajectory(200, 100, 10, 1)
