@@ -1,6 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 import NerdyMath
+import numpy
 
 class Drivetrain():
 
@@ -54,7 +55,7 @@ class Drivetrain():
             prev_error = error
 
     def turn_to_angle_PID(self, target, kP, kD):
-        angle = (360 - self.robot_angle_deg) % 360
+        angle = -(360 - self.robot_angle_deg) % 360
         error = target - angle
         if error >= 180:
             error -= 360
@@ -62,8 +63,8 @@ class Drivetrain():
             error += 360
         prev_error = error
         while abs(error) > 0.02:
-            angle = (360 - self.robot_angle_deg) % 360
-            error = target - self.robot_angle_deg
+            angle = -(360 - self.robot_angle_deg) % 360
+            error = target - angle
             if error >= 180:
                 error -= 360
             elif error <= -180:
@@ -74,7 +75,55 @@ class Drivetrain():
 
 
 
+    def drive_at_heading(self, target_angle, kP, distance, straight_velocity):
+        angle = -(360 - self.robot_angle_deg) % 360
+        error = target_angle - angle
+        if error >= 180:
+            error -= 360
+        if error <= -180:
+            error += 360
+        straight_error = distance - self.robot_pos
+        while abs(straight_error) > 0.02:
+            straight_error = distance - self.robot_pos
+            angle = -(360 - self.robot_angle_deg) % 360
+            error = target_angle - angle
+            if error >= 180:
+                error -= 360
+            elif error <= -180:
+                error += 360
+            rot_velocity = error * kP
+            self.update(straight_velocity + rot_velocity, straight_velocity - rot_velocity)
 
+    def arc_turn(self, target, kP, power_right, direction):
+        angle = -(360 - self.robot_angle_deg) % 360
+        error = target - angle
+        if error >= 180:
+            error -= 360
+        if error <= -180:
+            error += 360
+        while abs(error) > 0.02:
+            angle = -(360 - self.robot_angle_deg) % 360
+            error = target - angle
+            if error >= 180:
+                error -= 360
+            elif error <= -180:
+                error += 360
+            velocity = abs(error * kP) * numpy.sign(direction)
+            # velocity = error * kP
+            if power_right:
+                self.update(0, velocity)
+            else:
+                self.update(velocity, 0)
+
+    def radius_turn(self, radius, velocity, distance, turn_right):
+        error = distance - self.robot_pos
+        while abs(error) > 0.02:
+            error = distance - self.robot_pos
+            inner_vel = velocity * (radius - (self.width/2))/(radius + (self.width/2))
+            if turn_right:
+                self.update(velocity, inner_vel)
+            else:
+                self.update(inner_vel, velocity)
 
 
 

@@ -15,10 +15,11 @@ from Drivetrain import Drivetrain
 # trajectory_1 = NerdyTrajectory(0, 0, 0, 50, 0, 50, 0, 100, 100, 1, 10, 3)
 
 taco = Drivetrain(20, 0.02)
-taco.turn_to_angle_PID(-180, 1, 0)
-taco.drive_forward_PID(50, 1, 0)
-taco.turn_to_angle_PID(90, 1, 0)
-taco.drive_forward_PID(100, 1, 0)
+# taco.turn_to_angle_PID(45, 0.1, 0)
+# taco.drive_forward_PID(100, 0.1, 0)
+# taco.drive_at_heading(90, 0.01, 1000, 2)
+# taco.arc_turn(45, 0.1, False, 1)
+taco.radius_turn(20, 1, 126, False)
 taco.graph()
 
 # print(1)

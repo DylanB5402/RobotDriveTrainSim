@@ -15,7 +15,7 @@ class BezierCurve:
         self.y3 = y3
         self.step = step
         self.generate_curve()
-        self.graph()
+        # self.graph()
 
 
     def generate_curve(self):
