@@ -19,14 +19,17 @@ class Drivetrain():
         self.x_list = []
         self.y_list = []
         self.robot_angle_deg = 0
+        self.time = 0
+        self.linear_vel = 0
+        self.angular_vel = 0
 
     def update(self, left_vel, right_vel):
         self.left_vel = left_vel
         self.right_vel = right_vel
-        linear_vel = (left_vel + right_vel)/2
-        angular_vel = (left_vel - right_vel)/self.width
-        delta_pos = linear_vel * self.dt
-        delta_theta = angular_vel * self.dt
+        self.linear_vel = (left_vel + right_vel)/2
+        self.angular_vel = (left_vel - right_vel)/self.width
+        delta_pos = self.linear_vel * self.dt
+        delta_theta = self.angular_vel * self.dt
         self.robot_pos += delta_pos
         self.robot_angle += delta_theta
         self.right_pos += self.right_vel * self.dt
@@ -36,6 +39,7 @@ class Drivetrain():
         self.x_list.append(self.robot_x)
         self.y_list.append(self.robot_y)
         self.robot_angle_deg = math.degrees(self.robot_angle)
+        self.time += self.dt
 
 
     def graph(self):
@@ -124,6 +128,54 @@ class Drivetrain():
                 self.update(velocity, inner_vel)
             else:
                 self.update(inner_vel, velocity)
+
+    def drive_motion_profile(self, target_distance, cruise_vel, max_accel):
+        max_accel_time = cruise_vel / max_accel
+        max_accel_dist = 0.5 * max_accel * max_accel_time ** 2
+        accel_time = math.sqrt(target_distance / max_accel)
+        if target_distance < 2 * max_accel_dist:  # if motion profile is triangular
+            is_trapezoidal = False
+            accel_time = math.sqrt(target_distance / max_accel)
+            cruise_time = 0
+        else:  # if motion profile is trapezoidal
+            accel_time = math.sqrt((2 * max_accel_dist) / max_accel)
+            cruise_distance = target_distance - (2 * max_accel_dist)
+            cruise_time = (cruise_distance / cruise_vel) + accel_time
+            is_trapezoidal = True
+        start_time = self.time
+        time = self.time - start_time
+        # print('total time', cruise_time + 2 * accel_time)
+        while time < cruise_time + 2 * accel_time :
+            time = self.time - start_time
+            if is_trapezoidal:
+                if time <= accel_time:
+                    velocity_output = max_accel * time
+                elif time > accel_time and time < cruise_time:
+                    velocity_output = cruise_vel
+                elif time >= cruise_time:
+                    velocity_output = -max_accel * (time - accel_time - cruise_time)
+                velocity_output
+            else:
+                if time <= accel_time:
+                    velocity_output = max_accel * time
+                elif time > accel_time:
+                    velocity_output = - max_accel * (time - accel_time) + (max_accel * accel_time)
+            self.update(velocity_output, velocity_output)
+
+    def drive_to_xy(self, x, y, straight_velocity, kP):
+        start_time = self.time
+        while NerdyMath.distance_formula(x, y, self.robot_x, self.robot_y) >= 2 and self.time - start_time < 1000:
+            target_angle = math.degrees(math.atan2(x - self.robot_x, y - self.robot_y))
+            angle = -(360 - self.robot_angle_deg) % 360
+            error = target_angle - angle
+            if error >= 180:
+                error -= 360
+            elif error <= -180:
+                error += 360
+            rot_velocity = error * kP
+            self.update(straight_velocity + rot_velocity, straight_velocity - rot_velocity)
+
+
 
 
 

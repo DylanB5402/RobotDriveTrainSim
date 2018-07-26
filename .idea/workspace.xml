@@ -4,8 +4,8 @@
     <list default="true" id="7964e0e9-c004-41c1-bb33-1b3effc39839" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../APCSPCreateTask/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../APCSPCreateTask/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BezierCurve.py" beforeDir="false" afterPath="$PROJECT_DIR$/BezierCurve.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Drivetrain.py" beforeDir="false" afterPath="$PROJECT_DIR$/Drivetrain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RobotMath.py" beforeDir="false" afterPath="$PROJECT_DIR$/RobotMath.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Drivetrain.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Drivetrain.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Drivetrain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="123" column="40" selection-start-line="123" selection-start-column="40" selection-end-line="123" selection-end-column="40" />
+            <state relative-caret-position="815">
+              <caret line="176" selection-start-line="176" selection-end-line="176" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -29,14 +29,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+            <state relative-caret-position="305">
+              <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RobotMath.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RobotMath.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="102" column="84" lean-forward="true" selection-start-line="102" selection-start-column="84" selection-end-line="102" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -44,8 +53,8 @@
       <file leaf-file-name="BezierCurve.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BezierCurve.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="56" column="22" lean-forward="true" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
+            <state relative-caret-position="918">
+              <caret line="56" column="22" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -72,6 +81,7 @@
       <find>_y</find>
       <find>_List</find>
       <find>robotx_</find>
+      <find>self.</find>
     </findStrings>
     <replaceStrings>
       <replace>_pos</replace>
@@ -99,16 +109,16 @@
         <option value="$PROJECT_DIR$/MotionProflingTest.py" />
         <option value="$PROJECT_DIR$/TrajectoryTest.py" />
         <option value="$PROJECT_DIR$/TestTrajectory.py" />
+        <option value="$PROJECT_DIR$/BezierCurve.py" />
         <option value="$PROJECT_DIR$/RobotMath.py" />
         <option value="$PROJECT_DIR$/Drivetrain.py" />
         <option value="$PROJECT_DIR$/Test.py" />
-        <option value="$PROJECT_DIR$/BezierCurve.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="708" />
-    <option name="width" value="665" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="676" />
+    <option name="width" value="697" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -274,12 +284,12 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1295754" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19692533" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5080527" side_tool="true" weight="0.24673203" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5087848" side_tool="true" weight="0.22222222" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4919473" visible="true" weight="0.2647059" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49121523" visible="true" weight="0.19607843" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -298,7 +308,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -602,17 +612,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RobotMath.py">
+    <entry file="file://$PROJECT_DIR$/BezierCurve.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="89" column="37" selection-start-line="89" selection-start-column="37" selection-end-line="89" selection-end-column="37" />
+        <state relative-caret-position="918">
+          <caret line="56" column="22" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BezierCurve.py">
+    <entry file="file://$PROJECT_DIR$/RobotMath.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="56" column="22" lean-forward="true" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
+        <state relative-caret-position="323">
+          <caret line="102" column="84" lean-forward="true" selection-start-line="102" selection-start-column="84" selection-end-line="102" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -621,18 +641,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Drivetrain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="123" column="40" selection-start-line="123" selection-start-column="40" selection-end-line="123" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        <state relative-caret-position="815">
+          <caret line="176" selection-start-line="176" selection-end-line="176" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

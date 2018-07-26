@@ -98,3 +98,6 @@ def calc_wheel_velocities(v, w):
     l = (2*v - wheelbase * w)/2
     r = 2*v - l
     return l, r
+
+def calc_lookahead(velocity, max_velocity, max_lookahead, min_lookahead):
+    return min_lookahead + (velocity/max_velocity) * (max_lookahead - min_lookahead)
