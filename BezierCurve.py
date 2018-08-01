@@ -37,6 +37,7 @@ class BezierCurve:
         y_list = []
         angle = 0
         angle_list = []
+        dist_list = []
         prev_x = self.x0
         prev_y = self.y0
         while t != 1:
@@ -49,6 +50,7 @@ class BezierCurve:
             angle = math.degrees(angle)
             hypotenuse = NerdyMath.distance_formula(x, y, prev_x, prev_y)
             self.distance += hypotenuse
+            dist_list.append(self.distance)
             t_list.append(t)
             x_list.append(x)
             y_list.append(y)
@@ -59,16 +61,23 @@ class BezierCurve:
             # print(t)
             # print(self.distance)
             # print(delta_x, delta_y)
-            print(x, y, angle)
+            # print(x, y, angle)
         self.t_list = t_list
         self.x_list = x_list
         self.y_list = y_list
         self.angle_list = angle_list
-        print('done')
+        self.dist_list = dist_list
+        # print('done')
         # print(t_list)
-        print(x_list)
-        print(y_list)
-        print(angle_list)
+        # print(x_list)
+        # print(y_list)
+        # print(angle_list)
+
+    def get_last_x(self):
+        return self.x_list[-1]
+
+    def get_last_y(self):
+        return self.y_list[-1]
 
     def make_csv(self, file_name):
         x0 = self.x0
