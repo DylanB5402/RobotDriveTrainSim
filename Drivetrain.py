@@ -316,3 +316,175 @@ class Drivetrain():
         plt.axis([-100, 100, -100, 100])
         plt.legend(['robot position', 'path ' + str(kP) + ',' + str(kD)])
         plt.show()
+
+    def drive_pure_pursuit_2(self, path : BezierCurve, lookahead, velocity, kP, going_forwards):
+        start_time = self.time
+        time = self.time - start_time
+        t = 1
+        # while ((NerdyMath.distance_formula(self.robot_x, self.robot_y, path.get_last_x(),
+        #                                   path.get_last_y()) > 1) and t != len(path.y_list)) or time < 100:
+        while time < 100:
+            print(time)
+            time = self.time - start_time
+            if t >= len(path.x_list):
+                t = len(path.x_list) - 1
+            x1 = path.x_list[t]
+            y1 = path.y_list[t]
+            x2 = path.x_list[t-1]
+            y2 = path.y_list[t-1]
+            slope = (y2 - y1) / (x2 - x1)
+            y_int = y2 - slope * x2
+            a = (1 + slope ** 2)
+            b = (-2 * self.robot_x) + (2 * slope * (y_int - self.robot_y))
+            c = (self.robot_x ** 2) + (y_int - self.robot_y) ** 2 - lookahead ** 2
+            if (numpy.sign(slope) == 1 and going_forwards) or (numpy.sign(slope) == -1 and not going_forwards):
+                goal_x = (-b + math.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
+            elif (numpy.sign(slope) == -1 and going_forwards) or (numpy.sign(slope) == 1 and not going_forwards):
+                goal_x = (-b - math.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
+            goal_y = slope * goal_x + y_int
+            target_angle = math.degrees(math.atan2(goal_x - self.robot_x, goal_y - self.robot_y))
+            angle = -(360 - self.robot_angle_deg) % 360
+            error = target_angle - angle
+            if error >= 180:
+                error -= 360
+            elif error <= -180:
+                error += 360
+            rot_velocity = error * kP
+            self.update(velocity + rot_velocity, velocity - rot_velocity)
+            if NerdyMath.distance_formula(self.robot_x, self.robot_y, x1, y1) < 1:
+                t += 1
+        plt.plot(self.x_list, self.y_list)
+        plt.plot(path.x_list, path.y_list)
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.axis([-100, 100, -100, 100])
+        plt.legend(['robot position', 'path ' + str(kP) + ',' + str(lookahead)])
+        plt.show()
+
+    def drive_pure_pursuit_3(self, path: BezierCurve, min_lookahead, velocity, kP, going_forwards):
+        start_time = self.time
+        time = self.time - start_time
+        t = 1
+        # while (NerdyMath.distance_formula(self.robot_x, self.robot_y, path.get_last_x(),
+        #                                   path.get_last_y()) > 1) and t != len(path.y_list):
+        while time < 8.95:
+            print(t, time)
+            time = self.time - start_time
+            if t >= len(path.x_list):
+                t = len(path.x_list) - 1
+            x1 = path.x_list[t]
+            y1 = path.y_list[t]
+            x2 = path.x_list[t - 1]
+            y2 = path.y_list[t - 1]
+            slope = (y2 - y1) / (x2 - x1)
+            y_int = y2 - slope * x2
+            target_angle = math.degrees(math.atan2(x1 - self.robot_x, y1 - self.robot_y))
+            angle = -(360 - self.robot_angle_deg) % 360
+            error = target_angle - angle
+            if error >= 180:
+                error -= 360
+            elif error <= -180:
+                error += 360
+            lookahead = min_lookahead + abs(error * kP * min_lookahead)
+            a = (1 + slope ** 2)
+            b = (-2 * self.robot_x) + (2 * slope * (y_int - self.robot_y))
+            c = (self.robot_x ** 2) + (y_int - self.robot_y) ** 2 - lookahead ** 2
+            if (numpy.sign(slope) == 1 and going_forwards) or (numpy.sign(slope) == -1 and not going_forwards):
+                goal_x = (-b + math.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
+            elif (numpy.sign(slope) == -1 and going_forwards) or (numpy.sign(slope) == 1 and not going_forwards):
+                goal_x = (-b - math.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
+            goal_y = slope * goal_x + y_int
+
+            drive_radius = (lookahead ** 2) / (2 * (goal_x - self.robot_x))
+            inner_vel = velocity * (drive_radius - (self.width / 2)) / (drive_radius + (self.width / 2))
+            if numpy.sign(drive_radius) == -1:
+
+                self.update(inner_vel, velocity)
+            else:
+                self.update(velocity, inner_vel)
+
+            if NerdyMath.distance_formula(self.robot_x, self.robot_y, x1, y1) < 1:
+                t += 1
+
+        plt.plot(self.x_list, self.y_list)
+        plt.plot(path.x_list, path.y_list)
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.axis([-100, 100, -100, 100])
+        plt.legend(['robot position', 'path '  + ',' + str(lookahead)])
+        plt.show()
+
+    def drive_pure_pursuit_4(self, path: BezierCurve, min_lookahead, velocity, kP, going_forwards):
+        start_time = self.time
+        time = self.time - start_time
+        t = 0
+        # while (NerdyMath.distance_formula(self.robot_x, self.robot_y, path.get_last_x(),
+        #                                   path.get_last_y()) > 1) and t != len(path.y_list):
+        # while NerdyMath.distance_formula(self.robot_x, self.robot_y, path.get_last_x(), path.get_last_y()) > 2 :
+        while time < 73.6:
+            print(t, time)
+            time = self.time - start_time
+            # if t >= len(path.x_list):
+            #     t = len(path.x_list) - 1
+            t = path.get_closest_point(self.robot_x, self.robot_y)
+            x1 = path.x_list[t]
+            y1 = path.y_list[t]
+            x2 = path.x_list[t - 1]
+            y2 = path.y_list[t - 1]
+            slope = (y2 - y1) / (x2 - x1)
+            y_int = y2 - slope * x2
+            cross_path_x = (self.robot_y - y_int +  (slope**-1) * self.robot_x )/(slope + slope**-1)
+            cross_path_y = slope * cross_path_x + y_int
+            cros_path_error = NerdyMath.distance_formula(self.robot_x, self.robot_y, cross_path_x, cross_path_y)
+            lookahead = min_lookahead + abs(cros_path_error * kP)
+            a = (1 + slope ** 2)
+            b = (-2 * self.robot_x) + (2 * slope * (y_int - self.robot_y))
+            c = (self.robot_x ** 2) + (y_int - self.robot_y) ** 2 - lookahead ** 2
+
+            # if (numpy.sign(slope) == 1 and going_forwards) or (numpy.sign(slope) == -1 and not going_forwards):
+            if numpy.sign(slope) == -1:
+                goal_x = (-b - math.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
+            # elif (numpy.sign(slope) == -1 and going_forwards) or (numpy.sign(slope) == 1 and not going_forwards):
+            elif numpy.sign(slope) == 1:
+                goal_x = (-b + math.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
+            goal_y = slope * goal_x + y_int
+
+            drive_radius = (lookahead ** 2) / (2 * (self.robot_x - goal_x))
+            # print(drive_radius)
+            inner_vel = velocity * (drive_radius - (self.width / 2)) / (drive_radius + (self.width / 2))
+            target_angle = math.degrees(math.atan2(x1 - self.robot_x, y1 - self.robot_y))
+            angle = -(360 - self.robot_angle_deg) % 360
+            error = target_angle - angle
+            if error >= 180:
+                error -= 360
+            elif error <= -180:
+                error += 360
+            # if numpy.sign(drive_radius) == 1:
+            # if numpy.sign(error) == 1:
+
+            if numpy.sign(slope) == 1:
+                if (numpy.sign(math.cos(self.robot_angle)*(goal_x - self.robot_x) - math.sin(self.robot_angle) * (goal_y - self.robot_y))) == 1:
+                    self.update(inner_vel, velocity)
+                else:
+                    self.update(velocity, inner_vel)
+            elif numpy.sign(slope) == -1:
+                if (numpy.sign(math.cos(self.robot_angle)*(goal_x - self.robot_x) - math.sin(self.robot_angle) * (goal_y - self.robot_y))) == -1:
+                    self.update(inner_vel, velocity)
+                else:
+                    self.update(velocity, inner_vel)
+            elif numpy.sign(slope) ==  0:
+                self.update(velocity, velocity)
+            # print(velocity, inner_vel, 'vel')
+            # if NerdyMath.distance_formula(self.robot_x, self.robot_y, x1, y1) < 15:
+            #     t += 1
+            print(drive_radius**-1)
+        plt.plot(self.x_list, self.y_list)
+        plt.plot(path.x_list, path.y_list)
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.axis([-100, 200, -100, 200])
+        plt.legend(['robot position', 'path ' + ',' + str(kP)])
+        plt.show()
+
+
+

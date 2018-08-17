@@ -116,3 +116,15 @@ class BezierCurve:
         min_scale = NerdyMath.get_greater_value(x_min, y_min)
         plt.axis([min_scale, scale, min_scale, scale])
         plt.show()
+
+    def get_closest_point(self, x, y):
+        a = 1
+        index = 0
+        min = NerdyMath.distance_formula(x, y, self.x_list[0], self.y_list[0])
+        while a != len(self.x_list):
+            dist = NerdyMath.distance_formula(x, y, self.x_list[a], self.y_list[a])
+            if dist < min:
+                min = dist
+                index = a
+            a += 1
+        return index
